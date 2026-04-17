@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boukili's Cars | Sidi Kacem</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="icon" type="image/jpeg" href="logo.jpg">
+</head>
+<body>
+
+    <nav class="navbar">
+        <img src="logo.jpg" alt="Logo Boukili" class="logo-img">
+        <div class="nav-links">
+            <a href="#cars">Flotte</a>
+            <a href="#contact">Réserver</a>
+            <a href="https://wa.me/212665427893" class="btn-wa-nav"><i class="fab fa-whatsapp"></i> Chat</a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-text" data-aos="fade-right">
+            <h1>BOUKILI'S <span class="red">CARS</span></h1>
+            <h2>Sidi Kacem - Location de Voitures</h2>
+            <p>Modèles 2025 WW disponibles dès maintenant.</p>
+            <a href="#cars" class="btn-main">Choisir une voiture</a>
+        </div>
+    </header>
+
+    <section id="cars" class="fleet-section">
+        <h2 class="title" data-aos="fade-up">Notre Flotte <span class="red">WW</span></h2>
+        <div id="cars-grid" class="grid-cars"></div>
+    </section>
+
+    <section id="contact" class="contact-section">
+        <div class="form-container" data-aos="fade-up">
+            <h2>Réserver Votre Voiture</h2>
+            <p style="text-align: center; color: #aaa; margin-bottom: 20px;">Remplissez le formulaire, nous vous contacterons.</p>
+            
+            <form action="https://formspree.io/f/mgorkppa" method="POST">
+                <label>Nom Complet</label>
+                <input type="text" name="nom" placeholder="Votre nom" required>
+                
+                <label>N° de Téléphone</label>
+                <input type="tel" name="phone" placeholder="06XXXXXXXX" required>
+                
+                <label>Voiture Choisie</label>
+                <select name="voiture" id="voiture-select">
+                    <option value="Kia Sportage">Kia Sportage GT-Line</option>
+                    <option value="Kia Seltos">Kia Seltos Luxury</option>
+                    <option value="Dacia Logan">Dacia Logan Stepway</option>
+                    <option value="Opel Mokka">Opel Mokka Auto</option>
+                    <option value="Opel Corsa">Opel Corsa Black Edition</option>
+                </select>
+                
+                <div class="dates">
+                    <div>
+                        <label>Date Début</label>
+                        <input type="date" name="debut" required>
+                    </div>
+                    <div>
+                        <label>Date Fin</label>
+                        <input type="date" name="fin" required>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn-submit">Confirmer la Réservation</button>
+            </form>
+        </div>
+    </section>
+
+  <footer>
+    <div class="footer-content">
+        <p>📍 Sidi Kacem, Maroc</p>
+        <p class="phone-footer">📞 06 65 42 78 93 | 06 63 54 74 17</p>
+        
+        <div class="social-links">
+            <a href="https://www.facebook.com/Boukilis.Cars" target="_blank" class="fb">
+                <i class="fab fa-facebook"></i>
+            </a>
+            <a href="https://www.instagram.com/boukilis.cars?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="ig">
+                <i class="fab fa-instagram"></i>
+            </a>
+        </div>
+        
+        <p class="copyright">© 2025 Boukili's Cars. Tous droits réservés.</p>
+    </div>
+</footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+
+        const cars = [
+            {
+                name: "Kia Sportage gt-line",
+                images: ["kia-sportage1.jpg", "kia-sportage2.jpg", "kia-sportage3.jpg", "kia-sportage4.jpg"],
+                specs: "Automatique • Diesel • WW 2025"
+            },
+            {
+                name: "Kia Seltos Luxury",
+                images: ["Kiaseltos1.jpg", "Kiaseltos2.jpg", "Kiaseltos3.jpg"],
+                specs: "Automatique • Diesel • Full Option"
+            },
+            {
+                name: "Opel Mokka Automatique",
+                images: ["moka1.jpg", "moka2.jpg", "moka3.jpg", "moka4.jpg"],
+                specs: "Automatique • Essence • WW 2025"
+            },
+            {
+                name: "Opel Corsa Edition",
+                images: ["opelacorsa1.jpg", "opelacorsa2.jpg", "opelacorsa3.jpg", "opelacorsa4.jpg"],
+                specs: "Manuelle • Diesel • WW 2025"
+            }
+        ];
+
+        const grid = document.getElementById('cars-grid');
+
+        function renderCars() {
+            grid.innerHTML = ''; 
+            cars.forEach((car, index) => {
+                let thumbsHtml = '';
+                if(car.images.length > 1) {
+                    car.images.forEach((imgSrc) => {
+                        thumbsHtml += `<img src="${imgSrc}" class="thumb-img" onclick="changeMainImg(${index}, '${imgSrc}')">`;
+                    });
+                }
+
+                grid.innerHTML += `
+                    <div class="car-card" data-aos="zoom-in">
+                        <div class="img-container">
+                            <img src="${car.images[0]}" id="main-img-${index}" class="main-car-img">
+                            <div class="badge">Disponible</div>
+                        </div>
+                        <div class="car-info">
+                            <h3>${car.name}</h3>
+                            <div class="thumbs-container">${thumbsHtml}</div>
+                            <p class="specs">${car.specs}</p>
+                            <button onclick="scrollToForm('${car.name}')" class="btn-reserve">Réserver ce modèle</button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        // Fonction bach t-habat l-client l l-formulaire o t-kh-tar lih tomobile
+        function scrollToForm(carName) {
+            const select = document.getElementById('voiture-select');
+            select.value = carName;
+            document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function changeMainImg(carIndex, newSrc) {
+            document.getElementById(`main-img-${carIndex}`).src = newSrc;
+        }
+
+        window.onload = renderCars;
+    </script>
+</body>
+</html>

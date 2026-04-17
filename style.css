@@ -1,0 +1,250 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;800&display=swap');
+
+:root {
+    --red: #ff3e3e;
+    --dark: #0a0a0a;
+    --grey: #1a1a1a;
+    --green: #25d366;
+}
+
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: var(--dark);
+    color: white;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 5%;
+    background: rgba(0,0,0,0.95);
+    position: fixed;
+    top: 0;
+    width: 90%;
+    z-index: 1000;
+    border-bottom: 1px solid #333;
+}
+
+.logo-img { height: 55px; border-radius: 5px; }
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.btn-wa-nav {
+    background: var(--green);
+    padding: 8px 18px;
+    border-radius: 50px;
+}
+
+/* Hero */
+.hero {
+    height: 100vh;
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('minibackground.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    padding: 0 10%;
+}
+
+.hero h1 { font-size: clamp(2.5rem, 8vw, 4.5rem); line-height: 1.1; margin: 0; font-weight: 800; }
+.red { color: var(--red); }
+
+.btn-main {
+    background: var(--red);
+    color: white;
+    padding: 16px 35px;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    display: inline-block;
+    margin-top: 25px;
+    transition: 0.3s;
+}
+
+/* Fleet Section */
+.fleet-section { padding: 100px 5%; text-align: center; }
+.grid-cars {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 35px;
+}
+
+.car-card {
+    background: var(--grey);
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid #333;
+    transition: 0.4s;
+}
+
+.car-card:hover { transform: translateY(-10px); border-color: var(--red); }
+
+.main-car-img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+
+.badge {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: var(--red);
+    padding: 6px 12px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+/* Gallery Thumbs */
+.thumbs-container {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    padding: 15px 10px;
+    min-height: 55px;
+}
+
+.thumb-img {
+    width: 55px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 5px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: 0.2s;
+}
+
+.thumb-img:hover { border-color: var(--red); transform: translateY(-3px); }
+
+.car-info { padding: 0 20px 25px; }
+.car-title { font-size: 1.4rem; margin: 0; color: #fff; }
+.specs { color: #aaa; margin: 10px 0 20px; font-size: 0.9rem; }
+
+.btn-wa {
+    background: var(--green);
+    color: white;
+    padding: 12px 25px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    display: block;
+    transition: 0.3s;
+}
+
+.btn-wa:hover { filter: brightness(1.1); }
+
+/* Contact Form */
+.contact-section { padding: 80px 5%; background: #050505; }
+.form-container {
+    max-width: 500px;
+    margin: 0 auto;
+    background: var(--grey);
+    padding: 40px;
+    border-radius: 25px;
+}
+
+input, select {
+    width: 100%;
+    padding: 14px;
+    margin-bottom: 20px;
+    background: #252525;
+    border: 1px solid #444;
+    color: white;
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+
+.btn-submit {
+    width: 100%;
+    padding: 16px;
+    background: var(--red);
+    border: none;
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+footer { padding: 50px; text-align: center; border-top: 1px solid #222; color: #666; }
+.btn-reserve {
+    background: var(--red);
+    color: white;
+    padding: 12px 25px;
+    border-radius: 50px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    transition: 0.3s;
+}
+
+.btn-reserve:hover {
+    background: white;
+    color: var(--red);
+}
+
+.dates {
+    display: flex;
+    gap: 15px;
+}
+
+.dates div { width: 100%; }
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 0.8rem;
+    color: #ccc;
+}
+footer {
+    padding: 40px 5%;
+    background: #000;
+    text-align: center;
+    border-top: 1px solid #222;
+}
+
+.phone-footer {
+    margin-bottom: 15px;
+    font-weight: 600;
+    color: #eee;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 10px;
+}
+
+.social-links a {
+    font-size: 1.5rem; /* Sghir o m-nassem */
+    transition: 0.3s ease;
+    text-decoration: none;
+}
+
+.social-links .fb { color: #1877F2; }
+.social-links .ig { color: #E4405F; }
+
+.social-links a:hover {
+    transform: translateY(-5px) scale(1.1);
+    filter: brightness(1.2);
+}
+
+.copyright {
+    margin-top: 25px;
+    font-size: 0.75rem;
+    color: #555;
+}
