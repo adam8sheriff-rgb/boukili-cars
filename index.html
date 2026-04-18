@@ -37,8 +37,6 @@
     <section id="contact" class="contact-section">
         <div class="form-container" data-aos="fade-up">
             <h2>Réserver Votre Voiture</h2>
-            <p style="text-align: center; color: #aaa; margin-bottom: 20px;">Remplissez le formulaire, nous vous contacterons.</p>
-            
             <form action="https://formspree.io/f/mgorkppa" method="POST">
                 <label>Nom Complet</label>
                 <input type="text" name="nom" placeholder="Votre nom" required>
@@ -47,13 +45,7 @@
                 <input type="tel" name="phone" placeholder="06XXXXXXXX" required>
                 
                 <label>Voiture Choisie</label>
-                <select name="voiture" id="voiture-select">
-                    <option value="Kia Sportage">Kia Sportage GT-Line</option>
-                    <option value="Kia Seltos">Kia Seltos Luxury</option>
-                    <option value="Dacia Logan">Dacia Logan Stepway</option>
-                    <option value="Opel Mokka">Opel Mokka Auto</option>
-                    <option value="Opel Corsa">Opel Corsa Black Edition</option>
-                </select>
+                <select name="voiture" id="voiture-select"></select>
                 
                 <div class="dates">
                     <div>
@@ -71,83 +63,72 @@
         </div>
     </section>
 
-  <footer>
-    <div class="footer-content">
-        <p>📍 Sidi Kacem, Maroc</p>
-        <p class="phone-footer">📞 06 65 42 78 93 | 06 63 54 74 17</p>
-        
-        <div class="social-links">
-            <a href="https://www.facebook.com/Boukilis.Cars" target="_blank" class="fb">
-                <i class="fab fa-facebook"></i>
-            </a>
-            <a href="https://www.instagram.com/boukilis.cars?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="ig">
-                <i class="fab fa-instagram"></i>
-            </a>
+    <footer>
+        <div class="footer-content">
+            <p>📍 Sidi Kacem, Maroc</p>
+            <p class="phone-footer">📞 06 65 42 78 93 | 06 63 54 74 17</p>
+            <div class="social-links">
+                <a href="https://www.facebook.com/Boukilis.Cars" target="_blank" class="fb"><i class="fab fa-facebook"></i></a>
+                <a href="https://www.instagram.com/boukilis.cars" target="_blank" class="ig"><i class="fab fa-instagram"></i></a>
+            </div>
+            <p class="copyright">© 2026 Boukili's Cars. Tous droits réservés.</p>
         </div>
-        
-        <p class="copyright">© 2026 Boukili's Cars. Tous droits réservés.</p>
-    </div>
-</footer>
+    </footer>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init();
 
+        const generateImages = (prefix, count, ext = "jpeg") => {
+            let imgs = [];
+            for(let i=1; i<=count; i++) { imgs.push(`${prefix}${i}.${ext}`); }
+            return imgs;
+        };
+
         const cars = [
-            {
-                name: "Kia Sportage gt-line",
-                images: ["kia-sportage1.jpg", "kia-sportage2.jpg", "kia-sportage3.jpg", "kia-sportage4.jpg"],
-                specs: "Automatique • Diesel • WW 2025"
-            },
-            {
-                name: "Kia Seltos Luxury",
-                images: ["Kiaseltos1.jpg", "Kiaseltos2.jpg", "Kiaseltos3.jpg"],
-                specs: "Automatique • Diesel • Full Option"
-            },
-            {
-                name: "Opel Mokka Automatique",
-                images: ["moka1.jpg", "moka2.jpg", "moka3.jpg", "moka4.jpg"],
-                specs: "Automatique • Essence • WW 2025"
-            },
-            {
-                name: "Opel Corsa Edition",
-                images: ["opelacorsa1.jpg", "opelacorsa2.jpg", "opelacorsa3.jpg", "opelacorsa4.jpg"],
-                specs: "Manuelle • Diesel • WW 2025"
-            }
+            { name: "Peugeot 208 GT", images: generateImages("peugot208_", 9, "jpeg"), specs: "Automatique • Diesel • Sport", price: "400" },
+            { name: "Kia Sportage", images: generateImages("kia-sportage", 4, "jpg"), specs: "Automatique • Diesel • Full Option", price: "400" },
+            { name: "Peugeot 208 Allure", images: generateImages("allure", 7, "jpeg"), specs: "Manuelle • Diesel • Confort", price: "350" },
+            { name: "Opel Mokka", images: generateImages("moka", 4, "jpg"), specs: "Automatique • Essence • 2025", price: "300" },
+            { name: "Opel Corsa Manuelle", images: generateImages("opelacorsamanuelle", 6, "jpeg"), specs: "Manuelle • Diesel", price: "300" },
+            { name: "Kia Picanto", images: generateImages("Kiapicanto", 8, "jpeg"), specs: "Manuelle • Essence", price: "250" },
+            { name: "Kia Seltos", images: generateImages("Kiaseltos", 3, "jpg"), specs: "Automatique • Diesel", price: "300" },
+            { name: "Renault Clio", images: generateImages("Renault Clio", 7, "jpeg"), specs: "Manuelle • Diesel", price: "350" }
         ];
 
         const grid = document.getElementById('cars-grid');
+        const select = document.getElementById('voiture-select');
 
         function renderCars() {
-            grid.innerHTML = ''; 
+            grid.innerHTML = '';
+            select.innerHTML = '';
             cars.forEach((car, index) => {
-                let thumbsHtml = '';
-                if(car.images.length > 1) {
-                    car.images.forEach((imgSrc) => {
-                        thumbsHtml += `<img src="${imgSrc}" class="thumb-img" onclick="changeMainImg(${index}, '${imgSrc}')">`;
-                    });
-                }
+                let opt = document.createElement('option');
+                opt.value = car.name; opt.innerHTML = car.name;
+                select.appendChild(opt);
+
+                let thumbsHtml = car.images.map(imgSrc => 
+                    `<img src="${imgSrc}" class="thumb-img" onclick="changeMainImg(${index}, '${imgSrc}')" onerror="this.style.display='none'">`
+                ).join('');
 
                 grid.innerHTML += `
                     <div class="car-card" data-aos="zoom-in">
                         <div class="img-container">
-                            <img src="${car.images[0]}" id="main-img-${index}" class="main-car-img">
+                            <img src="${car.images[0]}" id="main-img-${index}" class="main-car-img" onerror="this.src='logo.jpg'">
                             <div class="badge">Disponible</div>
+                            <div class="price-tag">${car.price} DH<span>/jour</span></div>
                         </div>
                         <div class="car-info">
                             <h3>${car.name}</h3>
                             <div class="thumbs-container">${thumbsHtml}</div>
                             <p class="specs">${car.specs}</p>
-                            <button onclick="scrollToForm('${car.name}')" class="btn-reserve">Réserver ce modèle</button>
+                            <button onclick="scrollToForm('${car.name}')" class="btn-reserve">Réserver</button>
                         </div>
-                    </div>
-                `;
+                    </div>`;
             });
         }
 
-        // Fonction bach t-habat l-client l l-formulaire o t-kh-tar lih tomobile
         function scrollToForm(carName) {
-            const select = document.getElementById('voiture-select');
             select.value = carName;
             document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
         }
